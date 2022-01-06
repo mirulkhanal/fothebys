@@ -1,0 +1,17 @@
+{
+  "artist_name": "Mirul",
+  "year_created": 1990,
+  "classification": "Phonograph",
+  "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, odio expedita! Inventore quasi rem quia explicabo facere laudantium nobis commodi.",
+  "category": "PAINTING",
+  "price": 100,
+  "material": "Canvas",
+  "framed": true,
+  "seller": "randomString",
+  "image_url": [
+    {
+      "public_id": "e5qjqj",
+      "image_url": "https://res.cloudinary.com/dzqb3zq0p/image/upload/v1598420168/e5qjqj.jpg"
+    }
+  ]
+}

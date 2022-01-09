@@ -1,17 +1,46 @@
-{
-  "artist_name": "Mirul",
-  "year_created": 1990,
-  "classification": "Phonograph",
-  "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, odio expedita! Inventore quasi rem quia explicabo facere laudantium nobis commodi.",
-  "category": "PAINTING",
-  "price": 100,
-  "material": "Canvas",
-  "framed": true,
-  "seller": "randomString",
-  "image_url": [
-    {
-      "public_id": "e5qjqj",
-      "image_url": "https://res.cloudinary.com/dzqb3zq0p/image/upload/v1598420168/e5qjqj.jpg"
-    }
-  ]
-}
+[
+  {
+    "artist_name": "Ron Burgundy",
+    "year_created": 1820,
+    "title": "The last dipper",
+    "classification": "Oil",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deleniti repellat qui ipsam eum possimus saepe harum, doloribus natus ullam, et non distinctio, nesciunt alias. Sit ex earum, magni eaque voluptas, quo ipsam suscipit aliquid alias laudantium a illum atque officia voluptate? Libero, recusandae! Magnam, voluptates incidunt. Consequatur, quidem minima!",
+    "category": "PAINTING",
+    "auction_id": "randomId",
+    "height": 170,
+    "width": 300,
+    "depth": null,
+    "weight": null,
+    "price": 160000,
+    "material": "Wall",
+    "framed": false,
+    "medium": "pastel",
+    "image_url": "https://res.cloudinary.com/dtt49ipau/image/upload/v1641639554/last-supper-copy-01_ntxhv2.jpg",
+    "seller": "randomString"
+  },
+  {
+    "artist_name": "Jeremy Hogwarts",
+    "year_created": 100,
+    "title": "The philosopher of vatican",
+    "classification": "Stone art",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deleniti repellat qui ipsam eum possimus saepe harum, doloribus natus ullam, et non distinctio, nesciunt alias. Sit ex earum, magni eaque voluptas, quo ipsam suscipit aliquid alias laudantium a illum atque officia voluptate? Libero, recusandae! Magnam, voluptates incidunt. Consequatur, quidem minima!",
+    "category": "SCULPTURE",
+    "auction_id": "randomString",
+    "height": 170,
+    "width": 300,
+    "depth": 200,
+    "weight": 170,
+    "price": 6000000,
+    "material": "Stone",
+    "image_url": "https://res.cloudinary.com/dtt49ipau/image/upload/v1641641097/Vatican_StPaul_Statue_uhoiy0.webp"
+  },
+  {
+    "title": "The medieval auction",
+    "date": "1641646607",
+    "location": "Kathmandu",
+    "arts": [
+      { "_id": "61d971efa2b0d3452e8055c9" },
+      { "_id": "61d976b3afcd07eb97010d4a" }
+    ]
+  }
+]

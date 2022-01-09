@@ -1,25 +1,65 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
 a {
-  color: inherit;
   text-decoration: none;
 }
-
 * {
   box-sizing: border-box;
 }
 @layer components {
   nav {
-    @apply bg-emerald-200;
+    @apply flex items-center justify-between pr-4 bg-primary-red w-full;
+  }
+  .nav-links {
+    @apply flex justify-between px-5 tracking-wide;
+  }
+  .nav-links a {
+    @apply inline-block px-2 py-1 mx-3 my-1 text-xl font-extrabold text-primary-white hover:animate-pulse;
+  }
+  .cta-container {
+    @apply flex mx-5 justify-evenly;
+  }
+  .cta-container .cta-btn {
+    @apply px-5 py-2 mx-5 rounded-md bg-primary-gray text-primary-white;
+  }
+  a.view-btn {
+    @apply px-5 py-2 mx-5 rounded-md bg-primary-red text-primary-white;
+  }
+  main {
+    @apply p-0 flex flex-col justify-items-center items-center;
+  }
+  main h1 {
+    @apply p-5 text-4xl font-semibold;
+  }
+  .auction-container {
+    @apply grid grid-cols-4 gap-4 mx-10;
+  }
+  .auction-lot {
+    @apply flex flex-col w-3/4 items-center py-4 my-2 mx-5 text-base font-bold rounded-md bg-primary-gray justify-items-center text-primary-white;
+  }
+  .msg-container {
+    @apply w-2/4;
+  }
+  /* .auction-image {
+    @apply w-3/4;
+  } */
+  .auction-lot-title > h1 {
+    @apply text-5xl font-bold;
+  }
+  /* .auction-lot-image-container img {
+    @apply ;
+  } */
+  .description-label {
+    @apply flex justify-between px-20 pl-10;
+  }
+  .register-input {
+    @apply rounded-md outline-none text-2xl shadow-lg mx-4;
+  }
+  input[type='file'] {
+    display: none;
+  }
+  .dropdown-links {
+    @apply py-3 hover:bg-primary-red w-full text-center transition-all ease-in-out hover:text-primary-white;
   }
 }

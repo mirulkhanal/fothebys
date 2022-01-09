@@ -10,9 +10,13 @@ const artSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Year of production is required'],
   },
+  title: {
+    type: String,
+    required: [true, 'Art title is required'],
+  },
   classification: {
     type: String,
-    reuired: false,
+    required: [true, 'Art classification is required'],
   },
   description: {
     type: String,
@@ -25,11 +29,6 @@ const artSchema = new mongoose.Schema({
     enum: ART_CATEGORIES,
     message:
       'Category must be one of the following: PAINTING, SCULPTURE, DRAWING, PHOTOGRAPHY, OTHER',
-  },
-  auction_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Catalog',
-    required: false,
   },
   height: {
     type: Number,
@@ -56,22 +55,18 @@ const artSchema = new mongoose.Schema({
   medium: {
     type: String,
   },
-  image_url: [
-    {
-      public_id: {
-        type: String,
-        required: true,
-      },
-      image_url: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
+  image_url: {
+    type: String,
+    required: true,
+  },
   seller: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'Seller is required'],
+  },
+  bid_amount: {
+    type: Number,
+    default: 0,
   },
   created_at: {
     type: Date,

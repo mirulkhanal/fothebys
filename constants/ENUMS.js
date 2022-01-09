@@ -5,3 +5,4 @@ export const ART_CATEGORIES = [
   'PHOTOGRAPHY',
   'OTHER',
 ];
+ 

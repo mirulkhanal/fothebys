@@ -3,27 +3,21 @@ class APIUtils {
     this.query = query;
     this.queryString = queryString;
   }
+  // searcching based on location of the auction
   search() {
-    const artistName = this.queryString.artist;
-    if (artistName) {
+    const location = this.queryString.location;
+    if (location) {
       this.query = this.query.find({
-        artist_name: { $regex: artistName, $options: 'i' },
+        location: { $regex: location, $options: 'i' },
       });
     }
     return this;
   }
   filter() {
     const queryObj = { ...this.queryString };
-    const excludedFields = ['artist', 'page'];
+    const excludedFields = ['artist'];
     excludedFields.forEach((field) => delete queryObj[field]);
     this.query = this.query.find(queryObj);
-    return this;
-  }
-  pagination(resultsPerPage) {
-    const currentPage = Number(this.queryString.page) || 1;
-    this.query = this.query
-      .limit(resultsPerPage)
-      .skip((currentPage - 1) * resultsPerPage);
     return this;
   }
 }

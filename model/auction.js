@@ -17,6 +17,7 @@ const auctionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  arts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Art' }],
 });
 
 export default mongoose.models.Auction ||

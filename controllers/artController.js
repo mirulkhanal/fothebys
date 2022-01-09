@@ -5,19 +5,12 @@ import catchAsyncErrors from '../middlewares/catchAsyncErrors';
 import APIUtils from '../utils/apiUtils';
 
 const getAllArts = catchAsyncErrors(async (req, res, next) => {
-  const totalArts = await Art.countDocuments();
-
-  const apiUtils = new APIUtils(Art.find(), req.query)
-    .search()
-    .filter()
-    .pagination(4);
+  const apiUtils = new APIUtils(Art.find(), req.query).search().filter();
 
   const arts = await apiUtils.query;
 
   res.status(200).json({
     success: true,
-    count: arts.length,
-    totalCount: totalArts,
     arts,
   });
 });
@@ -44,7 +37,7 @@ const getArtById = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-const updateArtById = catchAsyncErrors(async (req, res) => {
+const updateArtById = catchAsyncErrors(async (req, res, next) => {
   let art = await Art.findById(req.query.id);
 
   if (!art) {
@@ -63,7 +56,7 @@ const updateArtById = catchAsyncErrors(async (req, res) => {
   });
 });
 
-const removeArtById = catchAsyncErrors(async (req, res) => {
+const removeArtById = catchAsyncErrors(async (req, res, next) => {
   let art = await Art.findById(req.query.id);
 
   if (!art) {
@@ -77,4 +70,4 @@ const removeArtById = catchAsyncErrors(async (req, res) => {
     message: 'Successfully removed art from the database',
   });
 });
-export { getAllArts, addArt, getArtById, updateArtById, removeArtById };
+export { getAllArts, addArt, getArtById, updateArtById, removeArtById } ;

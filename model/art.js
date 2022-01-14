@@ -56,13 +56,9 @@ const artSchema = new mongoose.Schema({
     type: String,
   },
   image_url: {
-    type: String,
-    required: true,
-  },
-  seller: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: [true, 'Seller is required'],
+    public_id: String,
+    url: String,
+    required: false,
   },
   bid_amount: {
     type: Number,
@@ -71,6 +67,10 @@ const artSchema = new mongoose.Schema({
   created_at: {
     type: Date,
     default: Date.now,
+  },
+  archived: {
+    type: Boolean,
+    default: false,
   },
 });
 

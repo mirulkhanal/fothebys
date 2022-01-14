@@ -37,10 +37,10 @@ export const clearErrors = () => async (dispatch) => {
   });
 };
 
-export const getAuthUserAction = (user) => async (dispatch) => {
+export const getAuthUserAction = () => async (dispatch) => {
   try {
     dispatch({ type: GET_USER_REQUEST });
-    const link = `${origin}/api/me`;
+    const link = `/api/me`;
     const { data } = await axios.get(link);
     dispatch({
       type: GET_USER_SUCCESS,

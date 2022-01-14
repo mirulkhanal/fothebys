@@ -8,13 +8,17 @@ const ArtItem = ({ art }) => {
       <h2 className='pb-3'>{art.title}</h2>
 
       <div className='auction-image'>
-        <Image src={art.image_url} alt='' width={250} height={150} />
+        {art.image_url ? (
+          <Image src={art.image_url.url} alt='' width={250} height={150} />
+        ) : (
+          ''
+        )}
       </div>
       <div className='py-2'>
         <h2>Artist: {art.artist_name}</h2>
         <h3>Price: &pound;{art.price}</h3>
       </div>
-      <Link href={`/auction/${art._id}`}>
+      <Link href={`/art/${art._id}`}>
         <a className='view-btn'>View details</a>
       </Link>
     </div>

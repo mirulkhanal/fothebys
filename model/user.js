@@ -45,6 +45,7 @@ const userSchema = new mongoose.Schema({
   profile_image: {
     public_id: String,
     url: String,
+    required: false,
   },
   resetPasswordToken: String,
   resetPasswordExpire: Date,

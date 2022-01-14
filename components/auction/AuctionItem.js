@@ -1,23 +1,23 @@
 import Link from 'next/link';
 import React from 'react';
-import { FaLocationArrow } from 'react-icons/fa';
-import { BsFillCalendarWeekFill } from 'react-icons/bs';
 const AuctionItem = ({ auction }) => {
   return (
     <div
-      className='flex flex-col shadow-2xl justify-evenly items-center py-5 bg-primary-gray text-primary-white'
+      className='flex flex-col gap-10 items-center bg-primary-white-2 rounded-3xl shadow-2xl h-full'
       key={auction._id}>
-      <h1 className='w-full flex-grow text-center'>{auction.title}</h1>
-      <h2 className='flex gap-2 items-center'>
-        <FaLocationArrow />
-        {auction.location}
+      <h1 className='text-xl text-center font-bold py-4 text-primary-white-2 bg-primary-red w-full'>
+        {auction.title}
+      </h1>
+      <h2 className='flex items-center gap-5 mx-5 text-xl font-semibold'>
+        Location:
+        <span>{auction.location}</span>
       </h2>
-      <h3 className='my-4 flex gap-2 items-center'>
-        <BsFillCalendarWeekFill />
+      <h2 className='flex items-center gap-5 mx-5 text-xl font-semibold'>
+        <span>Date:</span>
         {new Date(auction.date).toDateString()}
-      </h3>
+      </h2>
       <Link href={`/auction/${auction._id}`}>
-        <a className='bg-primary-red rounded-lg shadow-lg py-3 px-4 w-2/4 text-center text-primary-white'>
+        <a className='px-5 py-3 mx-2 my-2 bg-primary-red text-primary-white-2 rounded-xl text-md font-semibold'>
           Get Catalogue
         </a>
       </Link>

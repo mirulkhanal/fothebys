@@ -7,9 +7,9 @@ export default function (err, req, res, next) {
     err = new ErrorHandler('Refresh server to avoid overiding model', 501);
   }
 
-  if (err.name === 'CastError') {
-    err = new ErrorHandler('Invalid ID', 404);
-  }
+  // if (err.name === 'CastError') {
+  //   err = new ErrorHandler('Invalid ID', 404);
+  // }
 
   if (err.name === 'ValidationError') {
     const messages = Object.values(err.errors).map((val) => val.message);

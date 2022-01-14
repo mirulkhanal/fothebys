@@ -38,9 +38,6 @@ a {
   .auction-lot {
     @apply flex flex-col w-3/4 items-center py-4 my-2 mx-5 text-base font-bold rounded-md bg-primary-gray justify-items-center text-primary-white;
   }
-  .msg-container {
-    @apply w-2/4;
-  }
   /* .auction-image {
     @apply w-3/4;
   } */
@@ -61,5 +58,11 @@ a {
   }
   .dropdown-links {
     @apply py-3 hover:bg-primary-red w-full text-center transition-all ease-in-out hover:text-primary-white;
+  }
+  .form-label {
+    @apply flex text-lg font-medium text-center gap-4;
+  }
+  .form-label input[type='text'] {
+    @apply text-center;
   }
 }

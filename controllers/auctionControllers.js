@@ -5,9 +5,24 @@ import Auction from '../model/auction';
 import Art from '../model/art';
 
 const getAllAuctions = catchAsyncErrors(async (req, res, next) => {
-  const apiUtils = new APIUtils(Auction.find(), req.query).search();
+  const apiUtils = new APIUtils(
+    Auction.find({ archived: false }),
+    req.query
+  ).search();
 
   const auctions = await apiUtils.query;
+  if (!auctions) {
+    return next(new ErrorHandler('No auctions available at the moment', 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    auctions,
+  });
+});
+
+const getAllAdminAuctions = catchAsyncErrors(async (req, res, next) => {
+  const auctions = await Auction.find();
   if (!auctions) {
     return next(new ErrorHandler('No auctions available at the moment', 404));
   }
@@ -21,16 +36,20 @@ const getAllAuctions = catchAsyncErrors(async (req, res, next) => {
 const getArtsByAuctionId = catchAsyncErrors(async (req, res, next) => {
   const auction = await Auction.findById(req.query.id);
   let { arts } = auction;
-
-  if (!arts && arts.length < 0) {
+  if (!arts) {
     return next(new ErrorHandler('No arts in the auction', 404));
   }
 
-  const filteredArts = [];
+  let filteredArts = [];
   for (let art of arts) {
-    const auctionArt = await Art.findById(art._id);
-    filteredArts.push(auctionArt);
+    try {
+      const auctionArt = await Art.findById(art);
+      filteredArts.push(auctionArt);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
   res.status(200).json({
     success: true,
     arts: filteredArts,
@@ -63,19 +82,14 @@ const updateAuctionById = catchAsyncErrors(async (req, res, next) => {
   let auction = await Auction.findById(req.query.id);
 
   if (!auction) {
-    return next(new ErrorHandler('Art not found', 404));
+    return next(new ErrorHandler('Auction not found', 404));
   }
 
-  auction = await Auction.findByIdAndUpdate(
-    req.query.id,
-    req.body,
-    { $push: { arts: req.body.artId } },
-    {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
-    }
-  );
+  auction = await Auction.findByIdAndUpdate(req.query.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
 
   res.status(200).json({
     success: true,
@@ -100,33 +114,45 @@ const removeAuctionById = catchAsyncErrors(async (req, res, next) => {
 
 const removeArtsFromAuction = catchAsyncErrors(async (req, res, next) => {
   const auction = await Auction.findById(req.query.id);
+  // console.log(req.query);
   const artId = req.body.art_id;
+  console.log(req.body);
   let { arts } = auction;
 
-  if (!arts && arts.length < 0 && !arts.includes(artId)) {
+  if (!arts || arts.length < 0 || !arts.includes(artId)) {
     return next(new ErrorHandler('No arts in the auction', 404));
   }
-  arts.remove(artId);
-  await Auction.findByIdAndUpdate(req.query.id, { arts });
+  console.log('arts');
+  console.log(arts);
+  const filteredArts = arts.filter((art) => {
+    console.log(art);
+    return art != artId;
+  });
+  console.log('filteredArts');
+  console.log(filteredArts);
+  await Auction.findByIdAndUpdate(req.query.id, { arts: filteredArts });
 
   res.status(200).json({
     success: true,
-    arts,
+    filteredArts,
   });
 });
 
 const addArtsToAuction = catchAsyncErrors(async (req, res, next) => {
   const auction = await Auction.findById(req.query.id);
   const art = await Art.findById(req.body.art_id);
+  console.log(art);
   let { arts } = auction;
-
-  if (!arts && arts.length < 0 && arts.includes(art._id)) {
+  if (arts === null) {
+    return next(new ErrorHandler('Invalid lot ID'));
+  }
+  if (!arts || arts.length < 0 || arts.includes(art._id)) {
     return next(new ErrorHandler('Art is already in the auction', 404));
   }
-  arts.push(art._id);
+  arts.push(req.body.art_id);
   await auction.update({ arts });
 
-  res.status(200).json({
+  return res.status(200).json({
     success: true,
     arts,
   });
@@ -140,4 +166,5 @@ export {
   removeAuctionById,
   removeArtsFromAuction,
   addArtsToAuction,
+  getAllAdminAuctions,
 };

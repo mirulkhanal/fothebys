@@ -64,7 +64,7 @@ const Register = () => {
   return (
     <form
       onSubmit={registerHandler}
-      className='flex flex-col h-full justify-between items-center rounded-3xl w-4/12  p-4 m-4 shadow-2xl'>
+      className='flex flex-col h-4/5 mx-auto justify-between items-center rounded-3xl w-4/12  p-4 m-4 shadow-2xl'>
       {imagePreview && (
         <Image
           src={imagePreview}
@@ -118,7 +118,7 @@ const Register = () => {
         <input
           type='file'
           name='profile_image'
-          accept='images/*'
+          accept='image/*'
           onChange={fieldChangeHandler}
         />
         <BsCloudUpload /> <span>Upload image</span>

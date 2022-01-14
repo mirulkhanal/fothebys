@@ -1,15 +1,6 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import Image from 'next/image';
-import { toast } from 'react-toastify';
 import Link from 'next/link';
-const ArtDetails = () => {
-  const { art, error } = useSelector((state) => state.artDetails);
-
-  useEffect(() => {
-    toast.error(error);
-  }, [error]);
-
+const ArtDetails = ({ art }) => {
   return (
     <>
       <div className='auction-lot-title'>
@@ -17,12 +8,14 @@ const ArtDetails = () => {
       </div>
       <div className='flex justify-between w-screen pt-5 px-16'>
         <div className='auction-lot-image-container'>
-          <Image
-            src={art.image_url}
-            alt='the image for egyptian art'
-            width={700}
-            height={500}
-          />
+          {art.image_url && (
+            <Image
+              src={art.image_url.url}
+              alt='the image for egyptian art'
+              width={700}
+              height={500}
+            />
+          )}
         </div>
         <div className='w-96 flex flex-col gap-9'>
           <div className='h-fit w-full leading-8 rounded-3xl border-2 shadow-2xl'>

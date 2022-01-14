@@ -1,29 +1,25 @@
 import Layout from '../../components/layouts/Layout';
-import { wrapper } from '../../redux/store';
-import { getAuctionArts } from '../../redux/actions/auctionActions';
 import ArtList from '../../components/art/ArtList';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { toast } from 'react-toastify';
-
-const AuctionCatalogue = () => {
-  const { arts, error } = useSelector((state) => state.artsFromAuction);
-
-  useEffect(() => {
-    toast.error(error);
-  }, [error]);
-
+import axios from 'axios';
+const AuctionCatalogue = ({ arts }) => {
+  // console.log(hello);
   return (
     <Layout>
+      {/* {hello} */}
       <ArtList arts={arts} />
     </Layout>
   );
 };
 
 export default AuctionCatalogue;
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req, params }) => {
-      await store.dispatch(getAuctionArts(req, params.id));
-    }
-);
+export const getServerSideProps = async (context) => {
+  const response = await axios.get(
+    `http://localhost:3000/api/auction/${context.params.id}/arts`
+  );
+
+  return {
+    props: {
+      arts: response.data.arts,
+    },
+  };
+};

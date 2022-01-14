@@ -4,20 +4,22 @@ import AuctionItem from './AuctionItem';
 
 const AuctionList = ({ auctions, location }) => {
   return (
-    <main className='w-full h-full'>
-      <h1>{location ? `Auctions in ${location}` : 'Auctions'}</h1>
-      <div className='msg-container'>
+    <>
+      <h1 className='text-2xl font-extrabold my-4 '>
+        {location ? `Auctions in ${location}` : 'Auctions'}
+      </h1>
+      <div className='w-full h-fit flex items-center gap-10 justify-items-center p-10'>
         {auctions && auctions.length === 0 && (
-          <Banner message={'No art found for this auction'} />
+          <div className='w-full h-full'>
+            <Banner message={'No art found for this auction'} />
+          </div>
         )}
-      </div>
-      <div className='auction-container'>
         {auctions &&
           auctions.map((auction) => (
             <AuctionItem auction={auction} key={auction._id} />
           ))}
       </div>
-    </main>
+    </>
   );
 };
 

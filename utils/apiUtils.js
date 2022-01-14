@@ -15,6 +15,7 @@ class APIUtils {
   }
   filter() {
     const queryObj = { ...this.queryString };
+    console.log(queryObj);
     const excludedFields = ['artist'];
     excludedFields.forEach((field) => delete queryObj[field]);
     this.query = this.query.find(queryObj);

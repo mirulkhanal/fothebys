@@ -6,7 +6,7 @@ const auctionSchema = new mongoose.Schema({
     required: [true, 'Title is required'],
   },
   date: {
-    type: Date,
+    type: String,
     required: [true, 'Date is required'],
   },
   location: {
@@ -16,6 +16,10 @@ const auctionSchema = new mongoose.Schema({
   created_at: {
     type: Date,
     default: Date.now,
+  },
+  archived: {
+    type: Boolean,
+    default: false,
   },
   arts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Art' }],
 });

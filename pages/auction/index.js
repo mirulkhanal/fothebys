@@ -1,26 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Layout from '../../components/layouts/Layout';
 import { wrapper } from '../../redux/store';
-import { getAuctions } from '../../redux/actions/auctionActions';
+import { clearErrors, getAuctions } from '../../redux/actions/auctionActions';
 import AuctionList from '../../components/auction/AuctionList';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
 const AuctionPage = () => {
   const router = useRouter();
-  const { auctions, error } = useSelector((state) => state.allAuctions);
+  const dispatch = useDispatch();
+  const { auctions, loading, error } = useSelector(
+    (state) => state.allAuctions
+  );
   const { location } = router.query;
 
   useEffect(() => {
     if (error) {
       toast.error(error);
+      dispatch(clearErrors());
     }
-  }, [error]);
+  }, [error, dispatch]);
 
   return (
     <Layout title="Auctions | Fotheby's Auction House">
-      <AuctionList auctions={auctions} location={location || ''} />
+      {loading ? (
+        'Loading'
+      ) : (
+        <AuctionList auctions={auctions} location={location || ''} />
+      )}
     </Layout>
   );
 };

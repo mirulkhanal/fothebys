@@ -28,14 +28,14 @@ const Login = () => {
       className=' flex flex-col gap-10 shadow-2xl w-1/2 mx-auto my-36 p-10 justify-items-center items-center'>
       <h1 className='text-lg font-semibold'>Login with credentials</h1>
       <input
-        type='text'
+        type='email'
         value={email}
         placeholder='Email'
         className='flex-grow border-b-2 w-1/2 shadow-lg outline-none'
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        type='text'
+        type='password'
         value={password}
         className='flex-grow border-b-2 outline-none w-1/2 shadow-lg'
         placeholder='password'
